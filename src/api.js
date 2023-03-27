@@ -19,6 +19,7 @@ router.get('/', (req, res) => {
 
 
 router.post('/formSubmit', async (req, res) => {
+  console.log(process.env.EMAIL_ADDRESS_TO)
   let body = JSON.parse(Buffer.from(req.body, 'base64').toString());
 
   const { firstName, lastName, email, phone, message } = body.data

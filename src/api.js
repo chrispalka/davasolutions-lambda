@@ -11,6 +11,12 @@ app.use(cors())
 
 const router = express.Router();
 
+router.get('/', (req, res) => {
+  res.json({
+    'hello': 'hi!'
+  })
+})
+
 
 router.post('/formSubmit', async (req, res) => {
   let body = JSON.parse(Buffer.from(req.body, 'base64').toString());

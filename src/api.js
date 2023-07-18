@@ -39,17 +39,19 @@ router.post('/formSubmit', async (req, re) => {
   };
   const mailOptionsToRequester = {
     from: process.env.EMAIL_ADDRESS,
-    to: process.env.EMAIL_ADDRESS_TO,
-    subject: `New contact request from: ${firstName} ${lastName}`,
-    text: `Name: ${firstName} ${lastName}\nEmail: ${email}\n${phone !== '' ? 'Phone: ' + phone : ''}\n${message !== '' ? 'Message: \n\n' + message : ''}
-    `
+    to: email,
+    subject: `Thank you for your inquiry!`,
+    text: `Hello ${firstName} ${lastName},\nThank you for reaching out! A member of our team will get back to you as soon as possible.`
   };
 
   Promise.all([
     transporter.sendMail(mailOptionsToDava),
     transporter.sendMail(mailOptionsToRequester)
   ])
-    .then((res) => res.status(200).send('success'))
+    .then((res) => {
+      res.status(200).send('success')
+      console.log(res)
+    })
     .catch((err) => {
       res.status(404)
       console.log(err)

@@ -40,8 +40,8 @@ router.post('/formSubmit', async (req, res) => {
   const mailOptionsToRequester = {
     from: process.env.EMAIL_ADDRESS,
     to: email,
-    subject: `Thank you for your inquiry!`,
-    text: `Hello ${firstName} ${lastName},\nThank you for reaching out! A member of our team will get back to you as soon as possible.`
+    subject: `Auto-Reply From Dava Solutions`,
+    text: `Hello ${firstName},\n\nThank you for reaching out. \n\n A member of our team will get back to you as soon as possible.`
   };
 
   Promise.all([

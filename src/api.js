@@ -48,22 +48,15 @@ router.post('/formSubmit', async (req, res) => {
     transporter.sendMail(mailOptionsToDava),
     transporter.sendMail(mailOptionsToRequester)
   ])
-    .then((res) => {
+    .then((response) => {
       res.status(200).send('success')
-      console.log(res)
+      console.log(response)
     })
     .catch((err) => {
       res.status(404)
       console.log(err)
     })
-  // transporter.sendMail(mailOptionsToDava, (err, response) => {
-  //   if (err) {
-  //     console.log(err);
-  //     res.status(404)
-  //   } else {
-  //     res.status(200).send('success')
-  //   }
-  // });
+
   // transporter.sendMail(mailOptionsToRequester, (err, res) => {
   //   if (err) {
   //     console.log(err);

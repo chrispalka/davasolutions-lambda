@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 })
 
 
-router.post('/formSubmit', async (req, res) => {
+router.post('/formSubmit', async (req, re) => {
   let body = JSON.parse(Buffer.from(req.body, 'base64').toString());
 
   const { firstName, lastName, email, phone, message } = body.data
@@ -45,20 +45,23 @@ router.post('/formSubmit', async (req, res) => {
     `
   };
 
-  // Promise.all([
-  //   transporter.sendMail(mailOptionsToDava),
-  //   transporter.sendMail(mailOptionsToRequester)
-  // ])
-  //   .then((res) => res.status(200).send('success'))
-  //   .catch((err) => res.status(404))
-  transporter.sendMail(mailOptionsToDava, (err, response) => {
-    if (err) {
-      console.log(err);
+  Promise.all([
+    transporter.sendMail(mailOptionsToDava),
+    transporter.sendMail(mailOptionsToRequester)
+  ])
+    .then((res) => res.status(200).send('success'))
+    .catch((err) => {
       res.status(404)
-    } else {
-      res.status(200).send('success')
-    }
-  });
+      console.log(err)
+    })
+  // transporter.sendMail(mailOptionsToDava, (err, response) => {
+  //   if (err) {
+  //     console.log(err);
+  //     res.status(404)
+  //   } else {
+  //     res.status(200).send('success')
+  //   }
+  // });
   // transporter.sendMail(mailOptionsToRequester, (err, res) => {
   //   if (err) {
   //     console.log(err);

@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 })
 
 
-router.post('/formSubmit', async (req, re) => {
+router.post('/formSubmit', async (req, res) => {
   let body = JSON.parse(Buffer.from(req.body, 'base64').toString());
 
   const { firstName, lastName, email, phone, message } = body.data

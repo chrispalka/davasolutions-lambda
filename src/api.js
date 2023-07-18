@@ -51,7 +51,7 @@ router.post('/formSubmit', async (req, res) => {
   // ])
   //   .then((res) => res.status(200).send('success'))
   //   .catch((err) => res.status(404))
-  transporter.sendMail(mailOptionsToDava, (err, res) => {
+  transporter.sendMail(mailOptionsToDava, (err, response) => {
     if (err) {
       console.log(err);
       res.status(404)

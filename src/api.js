@@ -39,29 +39,37 @@ router.post('/formSubmit', async (req, res) => {
   };
   const mailOptionsToRequester = {
     from: process.env.EMAIL_ADDRESS,
-    to: email,
-    subject: `Thank you for your inquiry!`,
-    text: `Hello ${firstName} ${lastName},\nThank you for reaching out! A member of our team will get back to you as soon as possible.`
+    to: process.env.EMAIL_ADDRESS_TO,
+    subject: `New contact request from: ${firstName} ${lastName}`,
+    text: `Name: ${firstName} ${lastName}\nEmail: ${email}\n${phone !== '' ? 'Phone: ' + phone : ''}\n${message !== '' ? 'Message: \n\n' + message : ''}
+    `
   };
 
-  Promise.all([
-    transporter.sendMail(mailOptionsToDava),
-    transporter.sendMail(mailOptionsToRequester)
-  ])
-    .then((res) => res.status(200).send('success'))
-    .catch((err) => res.status(404))
-  //   transporter.sendMail(mailOptionsToDava, (err, response) => {
-  //     if (err) {
-  //       console.log(err);
-  //       res.status(404)
-  //     } else {
-  //       res.status(200).send('success')
-  //     }
-  //   });
-  // });
-})
+  // Promise.all([
+  //   transporter.sendMail(mailOptionsToDava),
+  //   transporter.sendMail(mailOptionsToRequester)
+  // ])
+  //   .then((res) => res.status(200).send('success'))
+  //   .catch((err) => res.status(404))
+  transporter.sendMail(mailOptionsToDava, (err, response) => {
+    if (err) {
+      console.log(err);
+      res.status(404)
+    } else {
+      res.status(200).send('success')
+    }
+  });
+  transporter.sendMail(mailOptionsToRequester, (err, response) => {
+    if (err) {
+      console.log(err);
+      res.status(404)
+    } else {
+      res.status(200).send('success')
+    }
+  });
+});
 
-  app.use('/.netlify/functions/api', router)
+app.use('/.netlify/functions/api', router)
 
-  module.exports = app
-  module.exports.handler = serverless(app)
+module.exports = app
+module.exports.handler = serverless(app)

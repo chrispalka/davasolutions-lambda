@@ -41,7 +41,7 @@ router.post('/formSubmit', async (req, res) => {
     from: process.env.EMAIL_ADDRESS,
     to: email,
     subject: `Auto-Reply From Dava Solutions`,
-    text: `Hello ${firstName},\n\nThank you for reaching out. \n\n A member of our team will get back to you as soon as possible.`
+    text: `Hello ${firstName},\n\nThank you for reaching out. \n\nA member of our team will get back to you as soon as possible. \n\nFor a faster response, you may text us at: (678) 424-7208.`
   };
 
   Promise.all([
